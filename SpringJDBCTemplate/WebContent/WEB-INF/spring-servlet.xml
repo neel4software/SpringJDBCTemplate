@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- telling container to take care of annotations stuff -->
+	<context:annotation-config />
+
+	<!-- declaring base package -->
+	<context:component-scan base-package="com.beingjavaguys" />
+
+	<!-- adding view resolver to show jsp's on browser -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- declare beans -->
+	<bean id="userDao" class="com.beingjavaguys.dao.UserDaoImpl" />
+	<bean id="userService" class="com.beingjavaguys.services.UserServiceImpl" />
+
+	<!-- declare datasource bean -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/userdb" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+</beans>
